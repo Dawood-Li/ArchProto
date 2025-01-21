@@ -1,0 +1,146 @@
+/* 基础样式 */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* 容器样式 */
+.app {
+    display: flex;
+    height: 100%;
+}
+
+/* 侧边栏样式 */
+.app__sidebar {
+    width: 350px;
+    border-right: 1px solid #ccc;
+}
+
+/* 搜索栏和标题栏的flex布局 */
+.search-bar, .editor__header {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+/* 全局输入框样式 */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+/* 全局按钮样式 */
+button {
+    padding: 10px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+/* 文档列表项的flex布局 */
+.doc-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 文档列表项中的ID、时间和标题 */
+.doc-item .doc-id {
+    font-weight: bold;
+    width: 40px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.doc-item .doc-updated {
+    color: #666;
+    flex-shrink: 0;
+    width: 90px;
+    margin-right: 5px;
+}
+
+.doc-item .doc-title {
+    flex-grow: 1;
+    margin-right: 5px;
+}
+
+/* 文档列表项中的删除按钮 */
+.doc-item .doc-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ff4444;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 编辑器样式 */
+.app__editor {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 编辑器内容区域 */
+.editor__content {
+    flex-grow: 1;
+    padding: 10px;
+}
+
+/* 编辑器文本框 */
+.editor__text {
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    font-size: 18px;
+}
+
+/* 移动端样式调整 */
+@media (max-width: 767px) {
+    /* 侧边栏在小屏下堆叠到顶部 */
+    .app {
+        flex-direction: column;
+    }
+    .app__sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+    }
+    
+    /* 编辑器在侧边栏下方显示 */
+    .app__editor {
+        margin-top: 15px; /* 或根据需要调整 */
+    }
+
+    /* 调整搜索栏和标题栏的输入框大小 */
+    input[type="text"] {
+        width: 80%; /* 或根据需要调整 */
+    }
+
+    /* 删除按钮在移动端的样式调整，以节省空间 */
+    .doc-item .doc-delete {
+        font-size: 14px;
+        width: 16px;
+        height: 16px;
+    }
+    
+    /* 其它根据需要调整的样式 */
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Markdown文档编辑器</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/interface.js" defer></script>
+    <script src="/main.js" defer></script>
+</head>
+<body>
+    <div id="app" class="app">
+        <div class="app__sidebar">
+            <div class="search-bar">
+                <input type="text" id="searchBox" class="search-bar__input" placeholder="搜索...">
+                <button id="searchButton" class="search-bar__button">搜索</button>
+                <button id="resetButton" class="search-bar__button">重置</button>
+            </div>
+            <div id="docList" class="doc-list">
+                <!-- 文档列表项 -->
+                <div class="doc-item">
+                    <span class="doc-id">1</span>
+                    <span class="doc-updated">2023-04-01</span>
+                    <span class="doc-title">文档标题</span>
+                    <button class="doc-delete">X</button>
+                </div>
+                <div class="doc-item">
+                    <span class="doc-id">666</span>
+                    <span class="doc-updated">2023-04-01</span>
+                    <span class="doc-title">文档标题</span>
+                    <button class="doc-delete">X</button>
+                </div>
+                <!-- 更多文档项 -->
+            </div>
+        </div>
+        <div class="app__editor">
+            <div class="editor__header">
+                <button id="newDocButton" class="editor__button">新建</button>
+                <input type="text" id="docTitle" class="editor__title" placeholder="标题...">
+                <button id="saveButton" class="editor__button">保存</button>
+            </div>
+            <div class="editor__content">
+                <textarea id="docContent" class="editor__text" placeholder="内容..."></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

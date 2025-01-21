@@ -1,0 +1,42 @@
+networks:
+  nginx_network:
+    driver: bridge
+
+
+volumes:
+  mysql_data:
+
+
+services:
+
+  nginx: # 子网关 仅负责api转发 和托管静态资源
+    image: m.daocloud.io/docker.io/library/nginx:1.27.2-alpine3.20-slim
+    ports:
+      - "8081:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro # 配置
+      - ./html:/usr/share/nginx/html:ro       # 前端页面 只读
+      - ./log/nginx:/var/log/nginx:rw         # 日志
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=C.UTF-8
+    networks:
+      - nginx_network
+
+  mysql:
+    image: m.daocloud.io/docker.io/library/mysql:9.1.0
+    volumes:
+      - mysql_data:/var/lib/mysql            # 命名数据卷
+      - ./sql:/docker-entrypoint-initdb.d:ro # 初始化脚本
+    environment:
+      - LANG=C.UTF-8
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=123456  # 容器不对外暴露任何端口 密码从简
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=dawood
+      - MYSQL_PASSWORD=123456  # 容器不对外暴露端口 密码从简
+    networks:
+      - nginx_network
+    ports:
+      - "3306:3306" # 仅开发版本 后续版本则不再暴露端口
+    command: --innodb-buffer-pool-size=128M --key-buffer-size=64M # 轻量级场景，优化内存使用
