@@ -14,7 +14,7 @@ services:
     ports:
       - "8081:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro # 配置
+      - ./${ENV}.nginx.conf:/etc/nginx/nginx.conf:ro # 配置 使用不同的nginx.conf
       - ./html:/usr/share/nginx/html:ro       # 前端页面 只读
       - ./log/nginx:/var/log/nginx:rw         # 日志
     environment:
@@ -39,4 +39,23 @@ services:
       - nginx_network
     ports:
       - "3306:3306" # 仅开发版本 后续版本则不再暴露端口
-    command: --innodb-buffer-pool-size=128M --key-buffer-size=64M # 轻量级场景，优化内存使用
+    command: --innodb-buffer-pool-size=16M --key-buffer-size=4M # 轻量级场景，优化内存使用
+
+  app:
+    build:
+      context: backend
+      dockerfile: ${ENV}.dockerfile # 使用不同的dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./backend/.m2:/root/.m2  # 绑定Maven缓存
+      - ./backend/pom.xml:/app/pom.xml
+      - ./backend/src:/app/src
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=C.UTF-8
+      - SPRING_PROFILES_ACTIVE=${ENV} # 使用不同的properties
+    ports:
+      - "8080:8080" # 仅开发版本 后续版本则不再暴露端口
+    networks:
+      - nginx_network

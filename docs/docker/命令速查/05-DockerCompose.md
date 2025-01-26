@@ -42,6 +42,11 @@ $ sudo docker-compose up -d
 $ sudo docker-compose logs
 ```
 
+### 查看日志 实时跟踪
+``` sh
+$ sudo docker-compose logs -f
+```
+
 ### 停止实例
 ``` sh
 $ sudo docker-compose stop

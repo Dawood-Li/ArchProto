@@ -20,3 +20,16 @@
     基于邮箱的用户注册登录  
     markdown渲染
     用Vue进行重构
+
+* 更新日志
+
+    2025年1月26日
+    初步实现了对prod test dev环境切换不同配置的支持
+    如可以根据ENV选择不同的nginx.conf，dockerfile, application.properties
+    优化了springboot app的构建流程。
+    dev.dockerfile: 复用maven缓存，映射代码启动，修改更快。
+    prod.dockerfile: 复用maven缓存，多阶段构建jar包，占用更低。
+    用.env.prod文件存储生产环境敏感信息
+    仅为初步支持，后续继续完善细化。
+    计划dev.nginx.conf使用自签名 prod.nginx.conf使用letsencrypt证书
+    devtools失效目前原因不明，推测和docker文件映射机制有关。

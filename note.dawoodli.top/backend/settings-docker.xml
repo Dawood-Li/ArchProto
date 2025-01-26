@@ -1,0 +1,20 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <localRepository>/root/.m2/repository</localRepository>
+  
+  <!-- 只有这里是在原有基础上新增的 -->
+  <mirrors>
+    <mirror>
+      <id>aliyunmaven</id>
+      <mirrorOf>central</mirrorOf>
+      <name>阿里云公共仓库</name>
+      <url>https://maven.aliyun.com/repository/central</url>
+    </mirror>
+    
+    <!-- 此处可以添加更多源 -->
+    <!-- ... -->
+  </mirrors>
+</settings>
