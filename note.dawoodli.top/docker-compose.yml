@@ -15,7 +15,8 @@ services:
       - "8081:80"
     volumes:
       - ./${ENV}.nginx.conf:/etc/nginx/nginx.conf:ro # 配置 使用不同的nginx.conf
-      - ./html:/usr/share/nginx/html:ro       # 前端页面 只读
+      # - ./html:/usr/share/nginx/html:ro       # 前端页面 只读
+      - ./frontend/dist:/usr/share/nginx/html:ro       # 前端页面 只读
       - ./log/nginx:/var/log/nginx:rw         # 日志
     environment:
       - TZ=Asia/Shanghai
@@ -31,10 +32,10 @@ services:
     environment:
       - LANG=C.UTF-8
       - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=123456  # 容器不对外暴露任何端口 密码从简
-      - MYSQL_DATABASE=testdb
-      - MYSQL_USER=dawood
-      - MYSQL_PASSWORD=123456  # 容器不对外暴露端口 密码从简
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     networks:
       - nginx_network
     ports:

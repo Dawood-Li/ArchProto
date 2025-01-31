@@ -1,5 +1,5 @@
 # 构建环境
-FROM m.daocloud.io/docker.io/library/alpine:latest AS build-env
+FROM m.daocloud.io/docker.io/library/alpine:3.20.3 AS build-env
 
 # 更换apk源为阿里云的Alpine镜像源并安装依赖
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
@@ -20,7 +20,7 @@ COPY src /app/src/
 RUN mvn -s /usr/share/maven/ref/settings-docker.xml package -DskipTests
 
 # 运行环境
-FROM m.daocloud.io/docker.io/library/alpine:latest
+FROM m.daocloud.io/docker.io/library/alpine:3.20.3
 
 # 更换apk源为阿里云的Alpine镜像源
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
